@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BRUZZONE IA — Demo comercial · Olivar Los Loros</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<style>
+:root{--green:#2E5E3A;--green-d:#234A2D;--leaf:#9CC962;--gold:#B7873B;--gold-l:#EBC987;
+  --cream:#F7F4EC;--ink:#1f2a22;--grey:#6b756e;--line:#e2e8e2;--white:#fff;
+  --serif:Georgia,"Times New Roman",serif;--sans:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;--maxw:1040px;--shadow:0 8px 26px rgba(46,94,58,.13);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.55;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px;}
+h1,h2,h3{font-family:var(--serif);color:var(--green);line-height:1.18;}
+.eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+.btn{display:inline-block;padding:12px 20px;border-radius:11px;font-weight:700;font-size:14px;}
+.btn.p{background:var(--gold);color:#2a2110;} .btn.g{background:var(--green);color:#fff;} .btn.ghost{background:#fff;color:var(--green);border:1.5px solid var(--green);}
+nav{background:var(--green);color:#fff;}
+nav .row{display:flex;align-items:center;gap:16px;padding:12px 0;}
+nav .logo{font-family:var(--serif);font-weight:700;font-size:18px;color:#fff;display:flex;gap:8px;align-items:center;}
+nav .logo .ia{color:var(--gold-l);} nav .sp{margin-left:auto;display:flex;gap:10px;}
+nav a.l{font-size:14px;color:#d7e4d7;font-weight:600;align-self:center;}
+.hero{background:linear-gradient(140deg,var(--green),var(--green-d));color:#fff;padding:54px 0;}
+.hero h1{color:#fff;font-size:34px;margin:12px 0 12px;} .hero h1 span{color:var(--gold-l);}
+.hero p{color:#e6efe6;max-width:640px;font-size:16px;}
+section{padding:50px 0;}
+.center{text-align:center;max-width:700px;margin:0 auto 30px;}
+.center h2{font-size:27px;margin:8px 0 10px;} .center p{color:var(--grey);}
+.kpis{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.kpi{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 18px;min-width:150px;text-align:center;}
+.kpi .v{font-family:var(--serif);font-size:26px;color:var(--green);font-weight:700;} .kpi .l{font-size:12px;color:var(--grey);}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+.card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;}
+.card .ic{font-size:24px;margin-bottom:8px;} .card h3{font-family:var(--sans);font-size:16px;color:var(--green);margin-bottom:6px;}
+.card p{font-size:13.5px;color:var(--grey);flex:1;margin-bottom:12px;} .card .go{align-self:flex-start;font-size:13px;font-weight:700;color:var(--green);}
+.badge{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;color:#fff;margin-left:6px;}
+.badge.demo{background:#9a6b16;} .badge.live{background:#3a6ea5;}
+.steps{counter-reset:s;display:grid;gap:10px;max-width:760px;margin:0 auto;}
+.st{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start;}
+.st .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#2a2110;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--serif);}
+.st h3{font-family:var(--sans);font-size:14.5px;color:var(--ink);} .st p{font-size:13px;color:var(--grey);}
+.mock{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);}
+.mock .bar{display:flex;gap:6px;margin-bottom:10px;} .mock .bar i{width:11px;height:11px;border-radius:50%;display:block;}
+.mock .grid{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;} .mock .grid .d{aspect-ratio:1;border-radius:50%;}
+.cta-band{background:linear-gradient(120deg,var(--gold),#caa052);color:#2a2110;padding:40px 0;text-align:center;}
+.cta-band h2{color:#2a2110;} .cta-band .b{margin-top:14px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+footer{background:var(--green-d);color:#9fb39f;padding:26px 0;font-size:12.5px;text-align:center;}
+.note{font-size:12px;color:var(--grey);text-align:center;margin-top:14px;}
+</style>
+</head>
+<body>
+<nav><div class="wrap row">
+  <a class="logo" href="../index.html"><img class="bz-brand-logo" src="logo-dark.svg" alt="BRUZZONE IA" style="height:30px"/></a>
+  <div class="sp">
+    <a class="l" href="../index.html">← Inicio</a>
+    <a class="btn p" href="../../../09_DASHBOARDS_Y_PLATAFORMA/03_Mapas_Interactivos/2026-05-29_LL_DASH_leaflet_LIVE_v03.html">Abrir dashboard</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Demo comercial</div>
+  <h1>El Olivar Los Loros,<br><span>árbol a árbol, en vivo.</span></h1>
+  <p>Una demostración pensada para entenderse en menos de 3 minutos: el mapa de 504 olivos, el QR de cada árbol, el monitoreo en terreno y la trazabilidad que ningún otro proveedor entrega.</p>
+</div></header>
+
+<section><div class="wrap">
+  <div class="center"><div class="eyebrow">Qué es</div><h2>Un sistema territorial inteligente, no un informe</h2>
+    <p>BRUZZONE IA georreferencia cada árbol, lo monitorea en terreno, registra su historial y lo muestra en un dashboard vivo. Todo respaldado por un modelo NDVI→rendimiento validado.</p></div>
+  <div class="kpis">
+    <div class="kpi"><div class="v">504</div><div class="l">olivos georreferenciados</div></div>
+    <div class="kpi"><div class="v">R² 0,74</div><div class="l">modelo NDVI→rendimiento</div></div>
+    <div class="kpi"><div class="v">3 zonas</div><div class="l">de manejo por vigor</div></div>
+    <div class="kpi"><div class="v">40–55%</div><div class="l">variabilidad entre árboles</div></div>
+  </div>
+</div></section>
+
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);"><div class="wrap">
+  <div class="center"><div class="eyebrow">Recorrido de 3 minutos</div><h2>Cómo se demuestra el valor</h2></div>
+  <div class="steps">
+    <div class="st"><div class="n">1</div><div><h3>El mapa</h3><p>El predio completo: 504 olivos coloreados por estado operacional sobre el perímetro real.</p></div></div>
+    <div class="st"><div class="n">2</div><div><h3>Un árbol</h3><p>Clic en un olivo: NDVI, rendimiento histórico, estado, técnico y su QR.</p></div></div>
+    <div class="st"><div class="n">3</div><div><h3>El QR</h3><p>"Su operador escanea esto en terreno y ve la ficha del árbol al instante."</p></div></div>
+    <div class="st"><div class="n">4</div><div><h3>El monitoreo</h3><p>Registra estado y foto; el árbol cambia de color en el mapa al momento.</p></div></div>
+    <div class="st"><div class="n">5</div><div><h3>Alertas</h3><p>Filtrar "solo quintral" muestra el foco del sector; el sistema prioriza.</p></div></div>
+    <div class="st"><div class="n">6</div><div><h3>Trazabilidad y postventa</h3><p>Historial por árbol y reportes periódicos que sostienen el acompañamiento.</p></div></div>
+  </div>
+  <div class="note">Sugerencia: abre el <a href="../../../09_DASHBOARDS_Y_PLATAFORMA/03_Mapas_Interactivos/2026-05-29_LL_DASH_leaflet_LIVE_v03.html" style="color:var(--green);font-weight:700">dashboard real</a> y sigue estos 6 pasos en vivo.</div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="center"><div class="eyebrow">Piezas del MVP</div><h2>Todo conectado</h2></div>
+  <div class="cards">
+    <a class="card" href="../../../09_DASHBOARDS_Y_PLATAFORMA/03_Mapas_Interactivos/2026-05-29_LL_DASH_leaflet_LIVE_v03.html">
+      <div class="ic">🗺️</div><h3>Dashboard territorial <span class="badge demo">DEMO</span></h3>
+      <p>Mapa vivo de los 504 olivos, zonas de manejo, KPIs y estado operacional. Funciona sin conexión.</p><span class="go">Abrir →</span></a>
+    <a class="card" href="../../frontend/src/components/qr/2026-05-29_LL_QR_live_ficha_publica_v01.html?codigo=LL-OLI-0001">
+      <div class="ic">📱</div><h3>QR de árbol <span class="badge live">LIVE</span></h3>
+      <p>Ficha pública de un árbol (LL-OLI-0001): estado, zona, NDVI y trazabilidad, sin login.</p><span class="go">Ver ficha →</span></a>
+    <a class="card" href="../../frontend/monitoring/2026-05-29_LL_MON_registro_monitoreo_v01.html?codigo=LL-OLI-0001">
+      <div class="ic">📝</div><h3>Monitoreo <span class="badge live">LIVE</span></h3>
+      <p>Registro de estado, severidad, observación y foto. El estado cambia solo vía RPC, nunca a mano.</p><span class="go">Abrir formulario →</span></a>
+    <a class="card" href="../../frontend/index.html">
+      <div class="ic">🚪</div><h3>Centro de demo</h3>
+      <p>Punto de entrada técnico que reúne dashboard, QR, monitoreo, login y documentación.</p><span class="go">Entrar →</span></a>
+    <div class="card">
+      <div class="ic">🔌</div><h3>Supabase LIVE</h3>
+      <p>Datos en vivo con PostGIS y RPC <code>arbol_geojson</code> / <code>registrar_monitoreo</code>, con fallback automático a DEMO.</p><span class="go" style="color:var(--grey)">Backend listo</span></div>
+    <div class="card">
+      <div class="ic">🔁</div><h3>Postventa inteligente</h3>
+      <p>Reportes periódicos, alertas proactivas y acceso permanente: el sistema se vuelve hábito.</p><span class="go" style="color:var(--grey)">Modelo de recurrencia</span></div>
+  </div>
+</div></section>
+
+<section class="cta-band"><div class="wrap">
+  <h2>¿Quiere ver su propio campo así?</h2>
+  <p style="color:#3d3016;margin-top:6px;">Le preparamos una demostración con su olivar.</p>
+  <div class="b">
+    <a class="btn g" href="../index.html#contacto">Agendar demostración</a>
+    <a class="btn ghost" href="../../frontend/index.html">Explorar el centro de demo</a>
+  </div>
+</div></section>
+
+<footer><div class="wrap">© <span id="y"></span> BRUZZONE IA · Demo comercial · Olivar Los Loros. Modo DEMO funciona sin conexión; las piezas LIVE requieren Supabase configurado.</div></footer>
+<script>document.getElementById("y").textContent=new Date().getFullYear();</script>
+</body>
+</html>

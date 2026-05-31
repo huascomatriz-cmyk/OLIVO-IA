@@ -1,0 +1,55 @@
+/* =====================================================================
+   BRUZZONE IA · Tokens de marca (v01 · 2026-05-29)
+   Paleta "mediterráneo moderno / olivar territorial" + tipografía.
+   Importar en cualquier página: <link rel="stylesheet" href=".../tokens.css">
+   ===================================================================== */
+:root{
+  /* --- Color primario (olivo) --- */
+  --bz-green:        #2E5E3A;   /* verde olivo profundo (principal) */
+  --bz-green-dark:   #234A2D;   /* degradados, hovers */
+  --bz-green-soft:   #DCE8DC;   /* fondos suaves */
+  --bz-leaf:         #9CC962;   /* verde hoja (acentos vivos) */
+
+  /* --- Acento (dorado / cosecha) --- */
+  --bz-gold:         #B7873B;   /* dorado oliva (acento) */
+  --bz-gold-light:   #EBC987;   /* dorado claro (sobre fondo oscuro) */
+
+  /* --- Neutros (cal mediterránea) --- */
+  --bz-cream:        #F7F4EC;   /* crema/cal (fondos) */
+  --bz-bg:           #F5F8F5;   /* fondo app */
+  --bz-ink:          #1f2a22;   /* texto principal */
+  --bz-grey:         #6b756e;   /* texto secundario */
+  --bz-line:         #e2e8e2;   /* bordes */
+  --bz-white:        #ffffff;
+
+  /* --- Estados operacionales (dashboard) --- */
+  --bz-sano:         #2E7D32;
+  --bz-vigilar:      #F9A825;
+  --bz-recuperandose:#26A69A;
+  --bz-podado:       #5C6BC0;
+  --bz-intervencion: #EF6C00;
+  --bz-critico:      #C62828;
+  --bz-pendiente:    #9E9E9E;
+
+  /* --- Zonas de manejo (NDVI) --- */
+  --bz-zona-alto:    #2E7D32;
+  --bz-zona-medio:   #F9A825;
+  --bz-zona-bajo:    #C62828;
+
+  /* --- Tipografía --- */
+  --bz-serif: Georgia, "Times New Roman", serif;          /* titulares (premium) */
+  --bz-sans:  -apple-system, "Segoe UI", Roboto, Arial, sans-serif; /* cuerpo */
+  --bz-mono:  "Consolas", "SFMono-Regular", monospace;    /* código/datos */
+
+  /* --- Escala / radios / sombra --- */
+  --bz-radius:   14px;
+  --bz-radius-sm:9px;
+  --bz-shadow:   0 6px 20px rgba(46,94,58,.12);
+  --bz-maxw:     1100px;
+}
+/* Uso recomendado:
+   - Titulares: var(--bz-serif), color var(--bz-green).
+   - Cuerpo: var(--bz-sans), color var(--bz-ink) sobre var(--bz-cream)/blanco.
+   - Acentos y CTAs: var(--bz-gold) / var(--bz-green).
+   - Mapas y dashboard: estados y zonas con las variables --bz-*.
+*/

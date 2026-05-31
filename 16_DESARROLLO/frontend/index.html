@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BRUZZONE IA — Centro de Demo · Olivar Los Loros</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<style>
+:root{
+  --green:#2E5E3A; --green-d:#234a2d; --gold:#B7873B; --ink:#1f2a22; --grey:#6b756e;
+  --line:#e2e8e2; --bg:#f5f8f5; --ok:#2E7D32; --live:#3a6ea5; --demo:#9a6b16;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);}
+a{color:inherit;text-decoration:none;}
+.container{max-width:1080px;margin:0 auto;padding:0 20px;}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);color:#fff;padding:42px 0 34px;}
+.hero .brand{font-size:14px;letter-spacing:3px;color:#cde0cd;font-weight:600;}
+.hero h1{margin:8px 0 6px;font-size:34px;line-height:1.15;}
+.hero h1 span{color:#EBC987;}
+.hero p{margin:0;max-width:680px;color:#e3eee3;font-size:15px;line-height:1.5;}
+.hero .meta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;}
+.tag{background:rgba(255,255,255,.14);padding:5px 12px;border-radius:20px;font-size:12.5px;}
+.tag b{color:#EBC987;}
+
+/* SECTIONS */
+section{padding:30px 0;}
+h2{font-size:19px;color:var(--green);margin:0 0 4px;}
+.sub{color:var(--grey);font-size:13.5px;margin:0 0 18px;}
+
+/* CARDS */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;transition:transform .12s,box-shadow .12s;}
+.card:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(46,94,58,.12);}
+.card .ico{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:21px;background:#eef4ee;margin-bottom:10px;}
+.card h3{margin:0 0 5px;font-size:16px;color:var(--green);}
+.card p{margin:0 0 14px;font-size:13.5px;color:var(--grey);line-height:1.5;flex:1;}
+.card .go{align-self:flex-start;background:var(--green);color:#fff;padding:9px 16px;border-radius:9px;font-size:13px;font-weight:600;}
+.card .go.sec{background:#fff;color:var(--green);border:1.5px solid var(--green);}
+.badge{display:inline-block;padding:2px 9px;border-radius:11px;font-size:11px;font-weight:700;color:#fff;margin-left:6px;vertical-align:middle;}
+.badge.demo{background:var(--demo);} .badge.live{background:var(--live);} .badge.doc{background:#777;}
+
+/* MODES */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.mode{background:#fff;border:1px solid var(--line);border-left:5px solid var(--demo);border-radius:12px;padding:16px;}
+.mode.live{border-left-color:var(--live);}
+.mode h4{margin:0 0 6px;font-size:15px;} .mode p{margin:0;font-size:13.5px;color:var(--grey);line-height:1.5;}
+.warn{margin-top:16px;background:#fff7e6;border:1px solid #f0d9a8;border-radius:10px;padding:13px 15px;font-size:13.5px;color:#7a5a16;}
+.warn b{color:#6b4e10;}
+
+/* STATUS */
+.status{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;}
+.status ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px 18px;}
+.status li{font-size:14px;padding:5px 0;display:flex;align-items:center;gap:9px;}
+.status .chk{width:20px;height:20px;border-radius:50%;background:var(--ok);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex:none;}
+
+/* DOCS */
+.docs{display:flex;flex-wrap:wrap;gap:9px;}
+.docs a{background:#fff;border:1px solid var(--line);border-radius:9px;padding:9px 13px;font-size:13px;color:var(--green);}
+.docs a:hover{background:#eef4ee;}
+
+footer{background:#fff;border-top:1px solid var(--line);padding:22px 0;color:var(--grey);font-size:12.5px;}
+.note{font-size:12px;color:var(--grey);margin-top:10px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="container">
+    <img class="bz-brand-logo" src="logo-dark.svg" alt="BRUZZONE IA" style="height:30px;margin-bottom:8px"/>
+    <h1>El primer sistema territorial inteligente<br><span>para el Olivar Los Loros</span></h1>
+    <p>Trazabilidad árbol a árbol, monitoreo territorial y automatización operacional sobre 504 olivos
+       georreferenciados. Este es el centro de demostración del MVP: todo el ecosistema en un solo lugar.</p>
+    <div class="meta">
+      <span class="tag"><b>504</b> olivos</span>
+      <span class="tag"><b>3</b> zonas de manejo</span>
+      <span class="tag">NDVI + rendimiento histórico</span>
+      <span class="tag">Modo <b>DEMO</b> / <b>LIVE</b></span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <h2>Accesos del MVP</h2>
+    <p class="sub">Cada tarjeta abre una pieza real del sistema. Las marcadas <span class="badge live">LIVE</span> requieren Supabase configurado; el dashboard funciona también en <span class="badge demo">DEMO</span> sin conexión.</p>
+    <div class="grid">
+
+      <!-- A. Dashboard -->
+      <a class="card" href="../../09_DASHBOARDS_Y_PLATAFORMA/03_Mapas_Interactivos/2026-05-29_LL_DASH_leaflet_LIVE_v03.html">
+        <div class="ico">🗺️</div>
+        <h3>Dashboard territorial <span class="badge demo">DEMO</span></h3>
+        <p>Ver el mapa vivo de los 504 olivos, zonas de manejo, KPIs y estado operacional. Funciona aunque no haya Supabase.</p>
+        <span class="go">Abrir dashboard →</span>
+      </a>
+
+      <!-- B. QR -->
+      <a class="card" href="src/components/qr/2026-05-29_LL_QR_live_ficha_publica_v01.html?codigo=LL-OLI-0001">
+        <div class="ico">📱</div>
+        <h3>QR de ejemplo <span class="badge live">LIVE</span></h3>
+        <p>Simular el escaneo de la ficha pública de un árbol (LL-OLI-0001): estado, zona, NDVI y trazabilidad, sin login.</p>
+        <span class="go sec">Ver ficha QR →</span>
+      </a>
+
+      <!-- C. Monitoreo -->
+      <a class="card" href="monitoring/2026-05-29_LL_MON_registro_monitoreo_v01.html?codigo=LL-OLI-0001">
+        <div class="ico">📝</div>
+        <h3>Registro de monitoreo <span class="badge live">LIVE</span></h3>
+        <p>Registrar estado, observación, severidad y evidencia de terreno. Cambia el estado solo vía RPC, nunca directo.</p>
+        <span class="go sec">Abrir formulario →</span>
+      </a>
+
+      <!-- D. Login -->
+      <a class="card" href="pages/2026-05-29_LL_AUTH_login_v01.html">
+        <div class="ico">🔑</div>
+        <h3>Login operador <span class="badge live">LIVE</span></h3>
+        <p>Iniciar sesión para operar el sistema (código OTP por correo). Operadores y agrónomos.</p>
+        <span class="go sec">Iniciar sesión →</span>
+      </a>
+
+      <!-- E. Registro operador -->
+      <a class="card" href="pages/2026-05-29_LL_AUTH_registro_usuario_v01.html">
+        <div class="ico">🧑‍🌾</div>
+        <h3>Registro de operador <span class="badge live">LIVE</span></h3>
+        <p>Solicitar acceso al sistema como operador o agrónomo. Alta simple por correo.</p>
+        <span class="go sec">Solicitar acceso →</span>
+      </a>
+
+      <!-- F. Documentación -->
+      <a class="card" href="README.md">
+        <div class="ico">📚</div>
+        <h3>Documentación técnica <span class="badge doc">DOCS</span></h3>
+        <p>Contrato API, seguridad RLS, estrategia de fallback, checklist MVP y guía de corte a Supabase Live.</p>
+        <span class="go sec">Ver documentación →</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+  <div class="container">
+    <h2>Modo DEMO y modo LIVE</h2>
+    <p class="sub">El sistema es híbrido: siempre abre, con o sin conexión.</p>
+    <div class="modes">
+      <div class="mode demo">
+        <h4>🟡 Modo DEMO</h4>
+        <p>Funciona sin Supabase, usando los datos embebidos en el dashboard (504 olivos + monitoreo simulado). Ideal para presentar sin depender de internet ni credenciales.</p>
+      </div>
+      <div class="mode live">
+        <h4>🔵 Modo LIVE</h4>
+        <p>Funciona con Supabase: el mapa carga desde la RPC <code>arbol_geojson</code> y los monitoreos se registran con la RPC <code>registrar_monitoreo</code>, actualizando el estado real de cada árbol.</p>
+      </div>
+    </div>
+    <div class="warn">
+      ⚠ <b>Regla operacional:</b> la demo nunca modifica directamente la tabla <code>arbol</code>.
+      Todo cambio de estado ocurre exclusivamente vía la RPC <b><code>registrar_monitoreo</code></b> (con <code>security definer</code> y RLS).
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Estado actual del MVP</h2>
+    <p class="sub">Lo que ya está construido y verificado.</p>
+    <div class="status">
+      <ul>
+        <li><span class="chk">✓</span> Dashboard Leaflet creado (DEMO + LIVE)</li>
+        <li><span class="chk">✓</span> 504 olivos cargados y georreferenciados</li>
+        <li><span class="chk">✓</span> GeoJSON operacional generado</li>
+        <li><span class="chk">✓</span> Supabase preparado (esquema, seed, RPC, RLS)</li>
+        <li><span class="chk">✓</span> QR público diseñado</li>
+        <li><span class="chk">✓</span> Monitoreo vía RPC definido</li>
+        <li><span class="chk">✓</span> Login y registro de operador preparados</li>
+        <li><span class="chk">✓</span> Fallback DEMO/CACHÉ/LIVE implementado</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section style="background:#fff;border-top:1px solid var(--line);">
+  <div class="container">
+    <h2>Documentación técnica</h2>
+    <p class="sub">Enlaces directos. Los .md pueden abrirse en el editor o visor de Markdown.</p>
+    <div class="docs">
+      <a href="README_DEMO_CENTER.md">Guía del centro de demo</a>
+      <a href="2026-05-29_LL_DEV_corte_a_vivo_README_v01.md">Corte a Supabase Live</a>
+      <a href="2026-05-29_LL_DEV_contrato_api_v01.md">Contrato API</a>
+      <a href="2026-05-29_LL_DEV_seguridad_rls_v01.md">Seguridad y RLS</a>
+      <a href="2026-05-29_LL_DEV_fallback_estrategia_v01.md">Estrategia de fallback</a>
+      <a href="2026-05-29_LL_DEV_checklist_mvp_funcional_v01.md">Checklist MVP</a>
+      <a href="2026-05-29_LL_DEV_migracion_mapa_v01.md">Migración del mapa</a>
+      <a href="2026-05-29_LL_DEV_roadmap_inmediato_v01.md">Roadmap inmediato</a>
+      <a href="../../09_DASHBOARDS_Y_PLATAFORMA/01_Documentacion/2026-05-29_LL_DOC_arquitectura_operacional_v01.md">Arquitectura operacional</a>
+      <a href="../03_supabase/01_schema_mvp.sql">SQL · esquema</a>
+      <a href="../03_supabase/04_pruebas_validacion.sql">SQL · pruebas</a>
+    </div>
+    <p class="note">
+      <!-- AJUSTE DE RUTAS: este index.html vive en 16_DESARROLLO/frontend/.
+           Dashboard y arquitectura operacional están en 09_DASHBOARDS_Y_PLATAFORMA (por eso "../../09_...").
+           SQL en 16_DESARROLLO/03_supabase (por eso "../03_supabase/...").
+           Si mueves este archivo, ajusta estos prefijos relativos. -->
+      Nota: si los enlaces .md o .sql se descargan en vez de abrirse, es comportamiento normal del navegador con archivos locales; ábrelos desde el editor.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <b style="color:var(--green)">🌿 BRUZZONE IA</b> · Centro de demostración del MVP territorial · Olivar Los Loros (Freirina, Atacama).<br>
+    Ecosistema metodológico de servicios inteligentes · <span id="anio"></span>.
+  </div>
+</footer>
+<script>document.getElementById("anio").textContent=new Date().getFullYear();</script>
+</body>
+</html>

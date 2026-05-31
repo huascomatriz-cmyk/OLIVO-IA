@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>BRUZZONE IA — Ficha de árbol</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<!-- Plantilla de la ruta /qr/:codigo. En producción se sirve como página dinámica.
+     Uso de prueba: qr.html?codigo=LL-OLI-0001 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--green:#2E5E3A;--gold:#B7873B;--ink:#1f2a22;--grey:#6b756e;--line:#e6ece6;}
+*{box-sizing:border-box;} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:#f4f7f4;}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;}
+header{background:var(--green);color:#fff;padding:14px 16px;}
+header .b{font-weight:700;font-size:16px;} header .s{font-size:12px;color:#d7e4d7;}
+.pad{padding:16px;}
+.code{font-size:22px;font-weight:800;color:var(--green);}
+.pill{display:inline-block;padding:3px 12px;border-radius:14px;color:#fff;font-size:13px;font-weight:700;}
+.kv{width:100%;border-collapse:collapse;margin-top:12px;}
+.kv td{padding:9px 6px;border-bottom:1px solid var(--line);font-size:15px;}
+.kv td.k{color:var(--grey);width:50%;}
+.note{margin-top:14px;padding:11px 12px;background:#f4f7f4;border-radius:10px;font-size:13px;color:var(--grey);}
+.btn{display:block;width:100%;text-align:center;background:var(--green);color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;margin-top:14px;cursor:pointer;text-decoration:none;}
+.btn.sec{background:#fff;color:var(--green);border:1.5px solid var(--green);}
+.err{padding:24px 16px;color:#C62828;font-weight:600;}
+.muted{color:var(--grey);font-size:12px;}
+.foot{padding:16px;text-align:center;color:var(--grey);font-size:11px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img class="bz-brand-logo" src="logo-dark.svg" alt="BRUZZONE IA" style="height:24px;margin-bottom:3px"/><div class="s">Olivar Los Loros · Trazabilidad por árbol</div></header>
+  <div id="content" class="pad"><p class="muted">Cargando ficha…</p></div>
+  <div class="foot">Ficha pública de trazabilidad · BRUZZONE IA</div>
+</div>
+
+<script>
+// --- Config (en producción: variables de entorno del servidor) ---
+const ENV = window.__ENV__ || {
+  SUPABASE_URL: "https://TU-PROYECTO.supabase.co",
+  SUPABASE_ANON_KEY: "TU_ANON_KEY"
+};
+const ESTADOS = {
+  sano:{l:"Sano",c:"#2E7D32"}, monitoreo_pendiente:{l:"Monitoreo pendiente",c:"#9E9E9E"},
+  podado:{l:"Podado",c:"#5C6BC0"}, recuperandose:{l:"Recuperándose",c:"#26A69A"},
+  vigilar:{l:"Vigilar",c:"#F9A825"}, intervencion:{l:"Intervención",c:"#EF6C00"}, critico:{l:"Crítico",c:"#C62828"}
+};
+const params = new URLSearchParams(location.search);
+const codigo = params.get("codigo") || location.pathname.split("/").pop();
+
+const content = document.getElementById("content");
+function err(msg){ content.innerHTML = `<div class="err">⚠ ${msg}</div>`; }
+
+(async function(){
+  if(!codigo){ return err("Falta el código del árbol."); }
+  let sb;
+  try{ sb = supabase.createClient(ENV.SUPABASE_URL, ENV.SUPABASE_ANON_KEY); }
+  catch(e){ return err("No se pudo inicializar la conexión."); }
+
+  // 1) Lectura pública del árbol (RLS: select using(true))
+  const { data, error } = await sb.from("arbol")
+    .select("codigo,zona_manejo,clase_vigor_kmeans,ndvi,ndvi_actual,rendimiento_2019,rendimiento_2020,estado,ultimo_monitoreo")
+    .eq("codigo", codigo).single();
+  if(error || !data){ return err("Árbol no encontrado o sin conexión."); }
+
+  // 2) ¿Hay sesión? -> habilita registro (operador). Si no, modo cliente solo-lectura.
+  let sesion = null;
+  try{ const r = await sb.auth.getSession(); sesion = r.data?.session ?? null; }catch(_){}
+
+  const e = ESTADOS[data.estado] || {l:data.estado,c:"#888"};
+  content.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between">
+      <span class="code">${data.codigo}</span>
+      <span class="pill" style="background:${e.c}">${e.l}</span>
+    </div>
+    <table class="kv">
+      <tr><td class="k">Zona de manejo</td><td>${data.zona_manejo ?? "—"} (clase ${data.clase_vigor_kmeans ?? "—"})</td></tr>
+      <tr><td class="k">NDVI medio / actual</td><td>${data.ndvi ?? "—"} / ${data.ndvi_actual ?? "—"}</td></tr>
+      <tr><td class="k">Rendimiento 2019 / 2020</td><td>${data.rendimiento_2019 ?? "—"} / ${data.rendimiento_2020 ?? "—"} kg</td></tr>
+      <tr><td class="k">Última visita</td><td>${data.ultimo_monitoreo ?? "Sin visita registrada"}</td></tr>
+    </table>
+    ${ sesion
+        ? `<a class="btn" href="../../../monitoring/2026-05-29_LL_MON_registro_monitoreo_v01.html?codigo=${data.codigo}">＋ Registrar monitoreo</a>`
+        : `<div class="note">Estás viendo la <b>ficha pública</b> de este árbol. El registro de monitoreo requiere iniciar sesión como operador.</div>
+           <a class="btn sec" href="../../../pages/2026-05-29_LL_AUTH_login_v01.html?next=${encodeURIComponent(location.href)}">Iniciar sesión (operador)</a>` }
+    <div class="note">El historial completo de monitoreos está disponible para el equipo técnico autenticado.</div>`;
+})();
+</script>
+</body>
+</html>

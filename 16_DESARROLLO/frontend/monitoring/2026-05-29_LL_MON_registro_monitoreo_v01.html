@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>BRUZZONE IA — Registrar monitoreo</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--green:#2E5E3A;--grey:#6b756e;--line:#e6ece6;}
+*{box-sizing:border-box;} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f4f7f4;color:#1f2a22;}
+.wrap{max-width:480px;margin:0 auto;min-height:100vh;background:#fff;}
+header{background:var(--green);color:#fff;padding:14px 16px;} header .b{font-weight:700;font-size:16px;} header .s{font-size:12px;color:#d7e4d7;}
+.pad{padding:16px;} .code{font-size:20px;font-weight:800;color:var(--green);}
+label{display:block;font-size:12px;color:var(--grey);margin:12px 0 4px;text-transform:uppercase;letter-spacing:.3px;}
+select,input,textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;font-size:15px;font-family:inherit;}
+textarea{min-height:64px;resize:vertical;}
+.btn{display:block;width:100%;text-align:center;background:var(--green);color:#fff;border:none;border-radius:10px;padding:14px;font-size:15px;font-weight:700;margin-top:16px;cursor:pointer;text-decoration:none;}
+.btn.sec{background:#fff;color:var(--green);border:1.5px solid var(--green);}
+.msg{padding:12px;border-radius:9px;margin-top:12px;font-size:14px;}
+.msg.ok{background:#e8f5e9;color:#2E7D32;} .msg.err{background:#fdecea;color:#C62828;}
+.muted{color:var(--grey);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img class="bz-brand-logo" src="logo-dark.svg" alt="BRUZZONE IA" style="height:24px;margin-bottom:3px"/><div class="s">Registro de monitoreo · operador</div></header>
+  <div class="pad" id="content"><p class="muted">Cargando…</p></div>
+</div>
+<script>
+const ENV = window.__ENV__ || { SUPABASE_URL:"https://TU-PROYECTO.supabase.co", SUPABASE_ANON_KEY:"TU_ANON_KEY" };
+const ESTADOS=["sano","vigilar","recuperandose","podado","intervencion","critico","monitoreo_pendiente"];
+const codigo=new URLSearchParams(location.search).get("codigo")||location.pathname.split("/").pop();
+const C=document.getElementById("content");
+let sb=null;
+function msg(t,cls){return `<div class="msg ${cls}">${t}</div>`;}
+
+(async function(){
+  if(!codigo){ C.innerHTML=msg("Falta el código del árbol.","err"); return; }
+  try{ sb=supabase.createClient(ENV.SUPABASE_URL,ENV.SUPABASE_ANON_KEY); }catch(_){ C.innerHTML=msg("Sin conexión.","err"); return; }
+  // requiere sesión (operador)
+  const { data:{ session } } = await sb.auth.getSession();
+  if(!session){
+    C.innerHTML = msg("Debes iniciar sesión como operador para registrar un monitoreo.","err") +
+      `<a class="btn" href="../pages/2026-05-29_LL_AUTH_login_v01.html?next=${encodeURIComponent(location.href)}">Iniciar sesión</a>`;
+    return;
+  }
+  const opts=ESTADOS.map(e=>`<option value="${e}">${e}</option>`).join("");
+  C.innerHTML=`<div class="code">${codigo}</div>
+    <label>Nuevo estado</label><select id="estado">${opts}</select>
+    <label>Tipo de monitoreo</label><select id="tipo"><option>vigor</option><option>quintral</option><option>fitosanitario</option><option>poda</option><option>riego</option></select>
+    <label>Severidad (0–5)</label><input id="sev" type="number" min="0" max="5" value="0"/>
+    <label>Observación</label><textarea id="obs" placeholder="Describa lo observado…"></textarea>
+    <label>Fotografía</label><input id="foto" type="file" accept="image/*" capture="environment"/>
+    <button class="btn" id="save">✔ Guardar monitoreo</button>
+    <a class="btn sec" href="../src/components/qr/2026-05-29_LL_QR_live_ficha_publica_v01.html?codigo=${codigo}">Ver ficha</a>
+    <div id="out"></div>`;
+  document.getElementById("save").onclick=guardar;
+})();
+
+async function guardar(){
+  const out=document.getElementById("out");
+  const estado=document.getElementById("estado").value;
+  const tipo=document.getElementById("tipo").value;
+  const severidad=parseInt(document.getElementById("sev").value||"0",10);
+  const observacion=document.getElementById("obs").value||"(sin observación)";
+  const file=document.getElementById("foto").files[0];
+  out.innerHTML=msg("Guardando…","ok");
+  try{
+    let fotoUrl=null;
+    if(file){
+      const path=`monitoreos/${codigo}/${Date.now()}.jpg`;
+      const up=await sb.storage.from("evidencias").upload(path,file);
+      if(!up.error){ fotoUrl=sb.storage.from("evidencias").getPublicUrl(path).data.publicUrl; }
+    }
+    // ÚNICA vía: RPC. Nunca UPDATE directo a arbol.
+    const { data, error }=await sb.rpc("registrar_monitoreo",{
+      p_codigo:codigo,p_estado:estado,p_tipo:tipo,p_severidad:severidad,p_observacion:observacion,p_foto_url:fotoUrl});
+    if(error) throw error;
+    out.innerHTML=msg("✔ Monitoreo registrado. El árbol y el dashboard se actualizarán.","ok");
+  }catch(err){ out.innerHTML=msg("Error: "+(err.message||err),"err"); }
+}
+</script>
+</body>
+</html>

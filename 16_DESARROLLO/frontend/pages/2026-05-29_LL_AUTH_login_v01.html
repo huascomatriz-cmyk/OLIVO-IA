@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BRUZZONE IA — Iniciar sesión (operador)</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root{--green:#2E5E3A;--grey:#6b756e;--line:#e6ece6;}
+*{box-sizing:border-box;} body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#f4f7f4;color:#1f2a22;display:flex;min-height:100vh;align-items:center;justify-content:center;}
+.card{background:#fff;max-width:380px;width:92%;border-radius:14px;box-shadow:0 4px 20px rgba(0,0,0,.08);overflow:hidden;}
+header{background:var(--green);color:#fff;padding:18px;text-align:center;} header .b{font-weight:800;font-size:18px;} header .s{font-size:12px;color:#d7e4d7;}
+.pad{padding:20px;}
+label{display:block;font-size:12px;color:var(--grey);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.3px;}
+input{width:100%;padding:12px;border:1px solid var(--line);border-radius:9px;font-size:15px;}
+.btn{width:100%;background:var(--green);color:#fff;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:700;margin-top:14px;cursor:pointer;}
+.msg{margin-top:12px;font-size:13px;padding:10px;border-radius:8px;}
+.msg.ok{background:#e8f5e9;color:#2E7D32;} .msg.err{background:#fdecea;color:#C62828;}
+.muted{color:var(--grey);font-size:12px;margin-top:10px;text-align:center;}
+a{color:var(--green);}
+</style>
+</head>
+<body>
+<div class="card">
+  <header><img class="bz-brand-logo" src="logo-dark.svg" alt="BRUZZONE IA" style="height:30px;margin:2px auto 6px"/><div class="s">Acceso de operadores y agrónomos</div></header>
+  <div class="pad">
+    <div id="step1">
+      <label>Correo electrónico</label>
+      <input id="email" type="email" placeholder="operador@bruzzoneia.cl"/>
+      <button class="btn" id="send">Enviar código de acceso</button>
+      <div class="muted">Te enviaremos un código de un solo uso (OTP) a tu correo. No necesitas contraseña.</div>
+    </div>
+    <div id="step2" style="display:none">
+      <label>Código recibido por correo</label>
+      <input id="code" type="text" inputmode="numeric" placeholder="123456"/>
+      <button class="btn" id="verify">Verificar e ingresar</button>
+    </div>
+    <div id="out"></div>
+    <div class="muted">¿Sin acceso? <a href="2026-05-29_LL_AUTH_registro_usuario_v01.html">Solicitar registro</a></div>
+  </div>
+</div>
+<script>
+const ENV=window.__ENV__||{SUPABASE_URL:"https://TU-PROYECTO.supabase.co",SUPABASE_ANON_KEY:"TU_ANON_KEY"};
+const next=new URLSearchParams(location.search).get("next");
+let sb=null; try{ sb=supabase.createClient(ENV.SUPABASE_URL,ENV.SUPABASE_ANON_KEY); }catch(_){}
+const out=document.getElementById("out");
+function msg(t,c){out.innerHTML=`<div class="msg ${c}">${t}</div>`;}
+
+document.getElementById("send").onclick=async()=>{
+  const email=document.getElementById("email").value.trim();
+  if(!email) return msg("Ingresa tu correo.","err");
+  if(!sb) return msg("Configura Supabase (variables de entorno).","err");
+  try{
+    const { error }=await sb.auth.signInWithOtp({ email, options:{ shouldCreateUser:true } });
+    if(error) throw error;
+    document.getElementById("step1").style.display="none";
+    document.getElementById("step2").style.display="block";
+    msg("Código enviado a "+email+". Revisa tu correo.","ok");
+  }catch(e){ msg("Error: "+(e.message||e),"err"); }
+};
+document.getElementById("verify").onclick=async()=>{
+  const email=document.getElementById("email").value.trim();
+  const token=document.getElementById("code").value.trim();
+  try{
+    const { error }=await sb.auth.verifyOtp({ email, token, type:"email" });
+    if(error) throw error;
+    msg("✔ Sesión iniciada. Redirigiendo…","ok");
+    setTimeout(()=>{ location.href = next || "../09_PLACEHOLDER"; }, 900);
+  }catch(e){ msg("Código inválido: "+(e.message||e),"err"); }
+};
+</script>
+</body>
+</html>

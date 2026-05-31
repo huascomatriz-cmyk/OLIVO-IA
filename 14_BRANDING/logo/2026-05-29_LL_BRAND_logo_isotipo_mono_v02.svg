@@ -1,0 +1,10 @@
+<svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BRUZZONE IA">
+  <g transform="translate(0,0) scale(1.0)">
+    <circle cx="40" cy="40" r="38" fill="#2E5E3A"/>
+    <path d="M14 50 Q40 34 66 50" fill="none" stroke="#2E5E3A" stroke-width="2.4" opacity="0.9"/>
+    
+    <path d="M40 16 C30 26 30 40 40 50 C50 40 50 26 40 16 Z" fill="#2E5E3A"/>
+    <path d="M40 18 L40 49" stroke="#2E5E3A" stroke-width="1.6"/>
+    <circle cx="40" cy="40" r="5.5" fill="#2E5E3A" />
+  </g>
+</svg>
