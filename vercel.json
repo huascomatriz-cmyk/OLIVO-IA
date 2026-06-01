@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/inicio", "destination": "/16_DESARROLLO/web/index.html", "permanent": false },
+    { "source": "/demo", "destination": "/16_DESARROLLO/frontend/index.html", "permanent": false },
+    { "source": "/dashboard", "destination": "/09_DASHBOARDS_Y_PLATAFORMA/03_Mapas_Interactivos/2026-05-29_LL_DASH_leaflet_LIVE_v03.html", "permanent": false }
+  ]
+}
