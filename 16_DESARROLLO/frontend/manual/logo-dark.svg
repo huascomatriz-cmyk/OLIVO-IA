@@ -1,0 +1,16 @@
+<svg width="600" height="170" viewBox="0 0 600 170" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BRUZZONE IA">
+  <defs><linearGradient id="gh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#356A43"/><stop offset="1" stop-color="#224529"/></linearGradient></defs>
+  <rect width="600" height="170" rx="22" fill="#2E5E3A"/>
+  <g transform="translate(16,27) scale(1.45)">
+    <circle cx="40" cy="40" r="38" fill="url(#gh)"/>
+    <path d="M14 50 Q40 34 66 50" fill="none" stroke="#EBC987" stroke-width="2.4" opacity="0.9"/>
+    <path d="M18 60 Q40 46 62 60" fill="none" stroke="#EBC987" stroke-width="1.8" opacity="0.55"/>
+    <path d="M40 16 C30 26 30 40 40 50 C50 40 50 26 40 16 Z" fill="#9CC962"/>
+    <path d="M40 18 L40 49" stroke="#2E5E3A" stroke-width="1.6"/>
+    <circle cx="40" cy="40" r="5.5" fill="#EBC987" stroke="#fff" stroke-width="1.5"/>
+  </g>
+  <text x="156" y="100" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" letter-spacing="1">
+    <tspan fill="#fff">BRUZZONE</tspan><tspan dx="14" fill="#EBC987">IA</tspan>
+  </text>
+  <text x="326" y="132" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19.5" letter-spacing="2.5" fill="#F7F4EC">TERRITORIO  ·  IA  ·  PRECISIÓN</text>
+</svg>

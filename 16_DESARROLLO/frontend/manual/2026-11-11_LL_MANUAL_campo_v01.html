@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<!-- Uso privado del piloto: no indexar en buscadores -->
+<meta name="robots" content="noindex, nofollow"/>
+<title>BRUZZONE IA — Manual de campo · Olivo IA</title>
+<link rel="icon" href="favicon.ico" sizes="any"/>
+<link rel="icon" type="image/svg+xml" href="isotipo.svg"/>
+<link rel="apple-touch-icon" href="apple-touch-icon.png"/>
+<meta name="theme-color" content="#2E5E3A"/>
+<link rel="stylesheet" href="bruzzone-ds.css"/>
+<style>
+:root{
+  --green:#2E5E3A; --green-d:#234A2D; --gold:#B7873B; --gold-l:#EBC987;
+  --ink:#1f2a22; --grey:#6b756e; --line:#e2e8e2; --bg:#f5f8f5; --cream:#F7F4EC;
+  --info:#eaf2ee; --info-b:#bcd6c6; --info-t:#245a3a;
+  --tip:#fbf2dd; --tip-b:#e6cf95; --tip-t:#7a5a16;
+  --warn:#fdecea; --warn-b:#f1b7b0; --warn-t:#9b2c22;
+}
+*{box-sizing:border-box;}
+body{margin:0;font-family:-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;}
+a{color:inherit;}
+.wrap{max-width:620px;margin:0 auto;background:#fff;min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,.04);}
+
+/* HEADER */
+header{background:linear-gradient(135deg,var(--green) 0%,var(--green-d) 100%);color:#fff;padding:16px 18px 18px;position:sticky;top:0;z-index:30;}
+header .top{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+header img{height:24px;}
+header .ver{font-size:11px;letter-spacing:.5px;color:#cfe0cf;background:rgba(255,255,255,.14);padding:3px 9px;border-radius:20px;}
+header h1{margin:10px 0 2px;font-size:21px;font-family:Georgia,serif;}
+header p{margin:0;font-size:13px;color:#dcebdc;}
+
+/* ACTION BAR */
+.actions{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;}
+.btn{flex:1 1 auto;min-width:130px;text-align:center;border-radius:10px;padding:11px 12px;font-size:13.5px;font-weight:700;text-decoration:none;border:1.5px solid transparent;cursor:pointer;}
+.btn.primary{background:var(--gold);color:#2a2110;}
+.btn.primary:hover{background:var(--gold-l);}
+.btn.green{background:var(--green);color:#fff;}
+.btn.ghost{background:#fff;color:var(--green);border-color:var(--green);}
+.btn .mini{display:block;font-size:10.5px;font-weight:600;opacity:.8;margin-top:1px;}
+
+/* INDEX CHIPS */
+.idx{padding:14px 16px 4px;}
+.idx h2{font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--grey);margin:0 0 8px;}
+.chips{display:flex;gap:7px;flex-wrap:wrap;}
+.chips a{font-size:13px;font-weight:600;color:var(--green);background:#eef4ee;border:1px solid #d8e6d8;border-radius:20px;padding:7px 12px;}
+.chips a.key{background:var(--green);color:#fff;border-color:var(--green);}
+
+/* SECTIONS */
+section{padding:20px 16px;border-top:1px solid var(--line);}
+section:first-of-type{border-top:none;}
+h2.sec{font-size:18px;color:var(--green);font-family:Georgia,serif;margin:0 0 4px;scroll-margin-top:80px;}
+.lead{color:var(--grey);font-size:14px;margin:0 0 14px;}
+h3{font-size:15px;color:var(--green-d);margin:16px 0 6px;}
+p{margin:0 0 11px;font-size:14.5px;}
+ul{margin:0 0 12px;padding-left:20px;} li{font-size:14.5px;margin-bottom:6px;}
+
+/* NUMBERED STEPS (recorrido) */
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;}
+.steps>li{counter-increment:s;position:relative;padding:12px 12px 12px 48px;background:#fff;border:1px solid var(--line);border-radius:12px;margin-bottom:9px;font-size:14.5px;}
+.steps>li::before{content:counter(s);position:absolute;left:10px;top:11px;width:27px;height:27px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;}
+.steps b{color:var(--green-d);}
+
+/* BOTÓN DEL CUADERNO (nombres que ve el productor) */
+.kbd{display:inline-block;background:#eef4ee;border:1px solid #cfe0cf;border-bottom-width:2px;border-radius:6px;padding:1px 7px;font-size:13px;font-weight:700;color:var(--green-d);white-space:nowrap;}
+
+/* CALLOUTS */
+.call{border:1px solid;border-radius:11px;padding:12px 14px;margin:12px 0;font-size:14px;}
+.call b{display:block;margin-bottom:3px;}
+.call.info{background:var(--info);border-color:var(--info-b);color:var(--info-t);}
+.call.tip{background:var(--tip);border-color:var(--tip-b);color:var(--tip-t);}
+.call.warn{background:var(--warn);border-color:var(--warn-b);color:var(--warn-t);}
+
+/* SCALE PILLS */
+.scale{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 12px;}
+.lvl{border-radius:9px;padding:7px 10px;font-size:13px;font-weight:600;border:1px solid var(--line);background:#fafcfa;flex:1 1 90px;}
+.lvl .n{display:block;font-size:16px;font-weight:800;}
+.lvl.p0{border-color:#cfe0cf;} .lvl.p0 .n{color:#2E7D32;}
+.lvl.p1{border-color:#e6cf95;} .lvl.p1 .n{color:#C49A2E;}
+.lvl.p2{border-color:#e6cf95;} .lvl.p2 .n{color:#E08A1E;}
+.lvl.p3{border-color:#f1b7b0;} .lvl.p3 .n{color:#C62828;}
+.lvl.p4{border-color:#f1b7b0;background:#fdf1f0;} .lvl.p4 .n{color:#9b2c22;}
+
+/* TABLE */
+table.kv{width:100%;border-collapse:collapse;font-size:14px;margin:4px 0 12px;}
+table.kv th,table.kv td{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top;}
+table.kv th{background:#eef4ee;color:var(--green-d);font-size:12.5px;text-transform:uppercase;letter-spacing:.3px;}
+
+/* DETAILS (equipo técnico) */
+details.tech{border:1px solid var(--line);border-radius:12px;padding:0;margin:8px 0 4px;background:#fafcfa;overflow:hidden;}
+details.tech>summary{cursor:pointer;padding:14px 16px;font-weight:700;color:var(--green-d);font-size:15px;list-style:none;display:flex;align-items:center;gap:8px;}
+details.tech>summary::-webkit-details-marker{display:none;}
+details.tech>summary::before{content:"▸";color:var(--gold);font-size:14px;}
+details.tech[open]>summary::before{content:"▾";}
+details.tech .body{padding:0 16px 14px;}
+code,pre{font-family:Consolas,SFMono-Regular,monospace;}
+code{background:#eef2ee;padding:1px 5px;border-radius:5px;font-size:13px;}
+pre{background:#1f2a22;color:#e8f0e8;padding:12px;border-radius:9px;overflow:auto;font-size:12.5px;margin:8px 0;}
+
+/* FUTURE MODULES */
+.future{display:flex;gap:7px;flex-wrap:wrap;}
+.future span{font-size:12.5px;color:var(--grey);background:#f1f4f1;border:1px dashed #c9d6c9;border-radius:20px;padding:5px 11px;}
+
+footer{padding:22px 16px 34px;color:var(--grey);font-size:12.5px;border-top:1px solid var(--line);background:#fafcfa;}
+footer a{color:var(--green);font-weight:600;}
+.where{background:#eef4ee;border:1px solid #d8e6d8;border-radius:10px;padding:10px 13px;font-size:13px;color:var(--green-d);margin:10px 0 2px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="top">
+    <img src="logo-dark.svg" alt="BRUZZONE IA"/>
+    <span class="ver">USO PRIVADO · v0.1</span>
+  </div>
+  <h1>Manual de campo · Olivo IA</h1>
+  <p>Cuaderno de campo del olivar tradicional · Los Loros y La Juica</p>
+</header>
+
+<!-- ACCIONES PRINCIPALES -->
+<div class="actions">
+  <a class="btn primary" href="https://olivo-ia-cuaderno-de-campo.remarkablepersimmon1.chatgpt.site" target="_blank" rel="noopener">Abrir cuaderno de campo<span class="mini">se abre el Site del cuaderno</span></a>
+  <a class="btn ghost" href="../index.html">Volver<span class="mini">al Centro de Olivo IA</span></a>
+  <a class="btn green" href="https://olivo-ia-cuaderno-de-campo.remarkablepersimmon1.chatgpt.site" target="_blank" rel="noopener">Descargar PDF<span class="mini">pestaña Manual del cuaderno</span></a>
+</div>
+
+<!-- ÍNDICE -->
+<div class="idx">
+  <h2>Índice</h2>
+  <div class="chips">
+    <a class="key" href="#antes">Antes de salir al campo</a>
+    <a class="key" href="#registrar">Registrar una visita</a>
+    <a class="key" href="#conexion">Si falla la conexión</a>
+    <a href="#recorrido">Recorrido principal</a>
+    <a href="#escalas">Escalas 0–4 y 1–3</a>
+    <a href="#focos">Revisión de focos</a>
+    <a href="#glosario">Glosario</a>
+    <a href="#tecnico">Para el equipo técnico</a>
+  </div>
+</div>
+
+<!-- BIENVENIDA -->
+<section>
+  <h2 class="sec">Bienvenido a Olivo IA</h2>
+  <p>Olivo IA es el cuaderno digital de Bruzzone IA para el olivar tradicional. Cada árbol tiene una ficha
+     que reúne visitas, fotografías y observaciones. Tú consultas tu predio y registras lo que ves; el equipo
+     técnico sigue focos, planifica revisiones y documenta el piloto.</p>
+  <div class="call info">
+    <b>Cómo leer esta guía</b>
+    Los nombres en recuadro verde como <span class="kbd">Mapa</span> corresponden a botones y menús del cuaderno.
+    Los bloques <b>Información</b>, <b>Sugerencia</b> y <b>Atención</b> indican qué muestra el sistema, qué conviene revisar y qué puede afectar el registro.
+  </div>
+  <div class="where">Esta guía vive en la web de <b>Bruzzone IA</b>. El registro de árboles se hace en el <b>cuaderno de campo</b> (otro Site, con tu acceso autorizado). Cuando un paso ocurre en el cuaderno, lo indicamos.</div>
+</section>
+
+<!-- RECORRIDO PRINCIPAL -->
+<section id="recorrido">
+  <h2 class="sec">Cómo funciona: el recorrido principal</h2>
+  <p class="lead">Los seis pasos de una visita, de principio a fin.</p>
+  <ol class="steps">
+    <li>Elige <b>Los Loros</b> o <b>La Juica</b> y entra a <span class="kbd">Mapa</span>.</li>
+    <li>Confirma el <b>código del árbol</b> con la etiqueta o el croquis.</li>
+    <li>Abre la ficha con <span class="kbd">Ver ficha</span>.</li>
+    <li>Registra <b>quintral</b>, <b>floración</b> y <b>observaciones</b> con <span class="kbd">Registrar visita</span>.</li>
+    <li>Adjunta la <b>foto</b> de la copa.</li>
+    <li>Guarda con <span class="kbd">Guardar monitoreo</span> y comprueba el <b>historial</b>.</li>
+  </ol>
+</section>
+
+<!-- ANTES DE SALIR -->
+<section id="antes">
+  <h2 class="sec">Antes de salir al campo</h2>
+  <p class="lead">Equipo necesario y preparación. Revísalo antes de perder la señal.</p>
+
+  <h3>Equipo de terreno</h3>
+  <table class="kv">
+    <tr><th>Equipo</th><th>Para qué sirve</th><th>Qué comprobar</th></tr>
+    <tr><td>Teléfono con cámara</td><td>Abrir el cuaderno y fotografiar la copa.</td><td>Batería, espacio libre y acceso autorizado al Site.</td></tr>
+    <tr><td>Etiquetas o croquis oficial</td><td>Confirmar a qué árbol corresponde la visita.</td><td>Coincidencia entre predio, número de terreno y ficha en Olivo IA.</td></tr>
+    <tr><td>Conexión móvil y cuaderno de respaldo</td><td>Guardar en línea o anotar cuando se pierde la señal.</td><td>Abre el Site antes de salir. Lleva el croquis descargado o impreso.</td></tr>
+  </table>
+
+  <h3>Ingreso al cuaderno</h3>
+  <ul>
+    <li>Abre el enlace privado del cuaderno en el navegador de tu teléfono.</li>
+    <li>Si se solicita inicio de sesión, utiliza la cuenta autorizada.</li>
+    <li>En <span class="kbd">Resumen</span>, toca el nombre de tu predio antes de consultar el mapa o crear un monitoreo.</li>
+  </ul>
+  <div class="call info">
+    <b>Información</b>
+    En el teléfono, el menú del cuaderno se encuentra abajo. En computador, aparece a la izquierda. Los menús son
+    <span class="kbd">Resumen</span>, <span class="kbd">Mapa</span>, <span class="kbd">Tareas</span>, <span class="kbd">Validación</span>, <span class="kbd">Datos</span> y <span class="kbd">Manual</span>.
+  </div>
+</section>
+
+<!-- REGISTRAR UNA VISITA -->
+<section id="registrar">
+  <h2 class="sec">Registrar una visita</h2>
+  <p class="lead">El paso a paso detallado dentro del cuaderno.</p>
+  <ol class="steps">
+    <li>Abre Olivo IA, elige <b>Los Loros</b> o <b>La Juica</b> y entra a <span class="kbd">Mapa</span>.</li>
+    <li>Confirma el número con el croquis o la etiqueta. Busca el código y toca <span class="kbd">Ver ficha</span>. Si el mapa dice «Esquema», usa el croquis para ubicarte en terreno.</li>
+    <li>Toca <span class="kbd">Registrar visita</span>. Revisa predio, número y fecha. Registra el nivel de quintral y la floración cuando puedas evaluarla.</li>
+    <li>Agrega una observación. Por ejemplo, «foco visible en la parte alta de la copa, lado del camino».</li>
+    <li>Fotografía la copa con luz suficiente. Incluye la rama afectada si es visible y selecciona una foto JPG, PNG o WebP de hasta 4,5 MB.</li>
+    <li>Toca <span class="kbd">Guardar monitoreo</span> y revisa en el historial que aparezcan la visita y su foto. Si la conexión falla, conserva el formulario abierto mientras recuperas señal.</li>
+  </ol>
+  <div class="call info">
+    <b>Información · ejemplo del formulario</b>
+    Predio · Los Loros &nbsp;|&nbsp; Número de ficha · 24 &nbsp;|&nbsp; Quintral · Nivel 3 &nbsp;|&nbsp; Floración · Sin dato — luego <span class="kbd">Guardar monitoreo</span>.
+  </div>
+  <div class="call tip">
+    <b>Sugerencia</b>
+    Antes de guardar, revisa que el número del árbol coincida con la etiqueta o el croquis.
+  </div>
+</section>
+
+<!-- ESCALAS -->
+<section id="escalas">
+  <h2 class="sec">Escalas de observación</h2>
+
+  <h3>Quintral · 0 a 4</h3>
+  <div class="scale">
+    <div class="lvl p0"><span class="n">0</span>Sin quintral (copa revisada)</div>
+    <div class="lvl p1"><span class="n">1</span>Leve</div>
+    <div class="lvl p2"><span class="n">2</span>Moderado</div>
+    <div class="lvl p3"><span class="n">3</span>Severo</div>
+    <div class="lvl p4"><span class="n">4</span>Muy severo</div>
+  </div>
+  <p>Registra <b>0</b> cuando inspeccionaste la copa y no observaste quintral. Usa <b>1 a 4</b> según la pauta de
+     severidad validada por el equipo técnico. Si la copa no se pudo revisar, anota la incidencia fuera del
+     formulario y completa la evaluación después.</p>
+  <div class="call warn">
+    <b>Atención · focos prioritarios</b>
+    El cuaderno muestra como <b>foco prioritario</b> los árboles cuya última observación quedó en <b>nivel 3 o 4</b>. Esos son los que el equipo revisa primero.
+  </div>
+
+  <h3>Floración · 1 a 3</h3>
+  <p>Registra el código que corresponda según la pauta de campo. Usa <b>«Sin dato»</b> si no se evaluó o no hay una
+     categoría aplicable. Antes del piloto, practica la pauta con el equipo y guarda ejemplos fotográficos acordados por nivel.</p>
+</section>
+
+<!-- FOCOS Y TAREAS -->
+<section id="focos">
+  <h2 class="sec">Revisión de focos</h2>
+  <ol class="steps">
+    <li>En <span class="kbd">Resumen</span>, revisa cuántos árboles tienen visitas cargadas y cuántos focos aparecen por predio.</li>
+    <li>En <span class="kbd">Tareas</span>, abre el foco, asigna un responsable y fija fecha de revisión. Marca la tarea como hecha cuando termine. Registra una nueva visita si cambió lo observado en el árbol.</li>
+    <li>El equipo de validación usa <span class="kbd">Validación</span> para registrar productores y asociaciones, fechas de demo, necesidades y próximos pasos.</li>
+  </ol>
+</section>
+
+<!-- CONEXIÓN -->
+<section id="conexion">
+  <h2 class="sec">Qué hacer si falla la conexión</h2>
+  <p class="lead">La visita no se pierde: se respalda y se ingresa después.</p>
+  <table class="kv">
+    <tr><th>Qué pasó</th><th>Qué hacer</th></tr>
+    <tr><td>No hay señal</td><td>Anota predio, árbol, fecha, nivel, floración y observación. Guarda la foto en el teléfono y registra la visita cuando tengas conexión.</td></tr>
+    <tr><td>No aparece el árbol en el mapa</td><td>Quita los filtros y búscalo en la lista. Si no tiene ubicación, verifica el croquis con el equipo.</td></tr>
+    <tr><td>La foto no sube</td><td>Guarda la foto original y vuelve a intentar con una copia en JPG de menor tamaño.</td></tr>
+    <tr><td>Se guardó una ficha equivocada</td><td>Anota el código, la fecha y el error. Informa a la persona a cargo para que revise la corrección antes de usar el registro en los indicadores.</td></tr>
+  </table>
+  <div class="call tip">
+    <b>Sugerencia</b>
+    Abre el cuaderno y carga el croquis <b>antes</b> de entrar a zonas sin cobertura. Un formulario abierto conserva lo que escribiste mientras recuperas señal.
+  </div>
+</section>
+
+<!-- GLOSARIO -->
+<section id="glosario">
+  <h2 class="sec">Glosario</h2>
+  <table class="kv">
+    <tr><td><b>Predio</b></td><td>El olivar que estás revisando.</td></tr>
+    <tr><td><b>Ficha de árbol</b></td><td>Registro identificado por un código como LL-024, con ubicación, visitas y fotos cuando están disponibles.</td></tr>
+    <tr><td><b>Monitoreo</b></td><td>Observación fechada del árbol y su copa.</td></tr>
+    <tr><td><b>Foco prioritario</b></td><td>Árbol cuya última observación de quintral quedó en nivel 3 o 4.</td></tr>
+    <tr><td><b>Vigor</b></td><td>Clasificación del desarrollo del árbol. Aparece como alto, medio o bajo cuando se cargó el dato.</td></tr>
+  </table>
+</section>
+
+<!-- EQUIPO ACTUAL Y FUTURO -->
+<section>
+  <h2 class="sec">El equipo del piloto hoy</h2>
+  <p>El piloto se centra en lo esencial: el <b>teléfono</b> con conexión, la <b>cámara</b> para fotografiar la copa y el
+     <b>croquis o las etiquetas</b> para confirmar cada árbol. Usa un navegador actualizado en Android, iPhone o computador.
+     Necesitas conexión para consultar y guardar en el cuaderno. Si el equipo técnico levanta coordenadas con GPS, debe
+     verificarlas en terreno y cargarlas desde <span class="kbd">Datos</span>.</p>
+  <h3>Módulos futuros</h3>
+  <div class="future">
+    <span>Sensores en campo</span>
+    <span>Automatización de riego</span>
+    <span>Lectura de sensores</span>
+    <span>Análisis con IA</span>
+  </div>
+</section>
+
+<!-- PARA EL EQUIPO TÉCNICO -->
+<section id="tecnico">
+  <h2 class="sec">Para el equipo técnico</h2>
+  <p class="lead">Importación de datos y cruce de códigos. Pliega esta sección si eres productor.</p>
+  <details class="tech">
+    <summary>Preparación técnica e importación de datos</summary>
+    <div class="body">
+      <ol>
+        <li>Cruza los códigos internos <code>LL-001</code> a <code>LL-504</code> y <code>LJ-001</code> a <code>LJ-268</code> con los códigos oficiales. En La Juica verifica qué versión del croquis corresponde y conserva la numeración oficial en la etiqueta visible.</li>
+        <li>En <span class="kbd">Datos</span>, importa puntos y perímetros GeoJSON en WGS84. Usa longitud y latitud en ese orden. Las propiedades opcionales incluyen <code>etiqueta</code>, <code>vigor</code> (Alto, Medio o Bajo) y <code>estado</code> (Vivo, Muerto o Sin verificar). En los polígonos usa <code>LL</code> o <code>LJ</code> como <code>id</code>.</li>
+        <li>Convierte los monitoreos de QField a JSON y conserva un identificador estable por visita. Importa el historial y vincula las fotos originales en la visita correspondiente. Confirma el cruce con una muestra antes de cargar el resto.</li>
+        <li>Verifica en el teléfono una visita completa, una foto, un filtro por quintral y una tarea. Revisa el mismo registro desde otro dispositivo con la cuenta autorizada.</li>
+      </ol>
+      <div class="call warn">
+        <b>Atención</b>
+        Antes de asociar fotos o históricos, confirma que el código de terreno corresponde a la misma ficha en Olivo IA.
+      </div>
+      <p style="margin-bottom:6px"><b>Ejemplo de registro histórico</b> (sirve para comprobar la estructura):</p>
+      <pre>[{"id":"visita-001","tree":"LL-001","day":"2026-11-11","level":3,"bloom":null,"notes":"Ejemplo de estructura"}]</pre>
+      <p class="lead" style="margin:0">Referencia de estructura: Manual de Módulo Privado DropControl, v1.0.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ACCIONES AL PIE -->
+<section>
+  <div class="actions" style="position:static;border:none;padding:4px 0 0;">
+    <a class="btn primary" href="https://olivo-ia-cuaderno-de-campo.remarkablepersimmon1.chatgpt.site" target="_blank" rel="noopener">Abrir cuaderno de campo</a>
+    <a class="btn ghost" href="../index.html">Volver al Centro</a>
+    <a class="btn green" href="https://olivo-ia-cuaderno-de-campo.remarkablepersimmon1.chatgpt.site" target="_blank" rel="noopener">Descargar PDF</a>
+  </div>
+</section>
+
+<footer>
+  BRUZZONE IA · Manual de campo de Olivo IA · versión 0.1 — adaptación web del módulo privado.<br/>
+  El <b>PDF completo</b> y el <b>cuaderno de campo</b> se abren con tu acceso autorizado en el
+  <a href="https://olivo-ia-cuaderno-de-campo.remarkablepersimmon1.chatgpt.site" target="_blank" rel="noopener">Site del cuaderno</a>, pestaña <span class="kbd">Manual</span>.
+</footer>
+
+</div>
+</body>
+</html>

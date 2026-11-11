@@ -1,0 +1,129 @@
+/* =====================================================================
+   BRUZZONE IA · Sistema de Diseño Operacional (bruzzone-ds.css)
+   v01 · 2026-05-29 · Identidad visual oficial del ecosistema territorial.
+   Mediterráneo moderno · premium agrícola · GIS · dashboard SaaS.
+   Uso: <link rel="stylesheet" href=".../bruzzone-ds.css">
+   ===================================================================== */
+
+/* ---------- 0. VARIABLES OFICIALES (nombres canónicos, globales) ---------- */
+:root{
+  --olive-primary:#2E5E3A; --olive-dark:#234A2D; --olive-light:#9CC962;
+  --gold-primary:#B7873B;  --gold-light:#EBC987;
+  --bg-main:#F5F8F5;       --bg-cream:#F7F4EC;
+  --text-primary:#1F2A22;  --text-muted:#6B756E;
+  --success:#2E7D32; --warning:#F9A825; --danger:#C62828; --info:#3A6EA5;
+}
+
+/* ---------- 1. TOKENS DE MARCA ---------- */
+:root{
+  --bz-green:#2E5E3A; --bz-green-d:#234A2D; --bz-green-soft:#DCE8DC; --bz-leaf:#9CC962;
+  --bz-gold:#B7873B; --bz-gold-l:#EBC987;
+  --bz-cream:#F7F4EC; --bz-bg:#F5F8F5; --bz-ink:#1F2A22; --bz-grey:#6B756E; --bz-line:#E2E8E2; --bz-white:#fff;
+  /* Semáforo operacional */
+  --bz-sano:#2E7D32; --bz-vigilar:#F9A825; --bz-recuperandose:#26A69A;
+  --bz-podado:#5C6BC0; --bz-intervencion:#EF6C00; --bz-critico:#C62828; --bz-pendiente:#9E9E9E;
+  /* Zonas de manejo (NDVI) */
+  --bz-zona-alto:#2E7D32; --bz-zona-medio:#F9A825; --bz-zona-bajo:#C62828;
+  /* Modo de datos */
+  --bz-demo:#9A6B16; --bz-live:#1F7A3D; --bz-cache:#3A6EA5;
+  /* Tipografía */
+  --bz-serif:Georgia,"Times New Roman",serif;
+  --bz-sans:-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --bz-mono:"Consolas","SFMono-Regular",monospace;
+  /* Escala tipográfica */
+  --bz-fs-display:42px; --bz-fs-h1:30px; --bz-fs-h2:22px; --bz-fs-h3:16px;
+  --bz-fs-body:15px; --bz-fs-sm:13px; --bz-fs-xs:11.5px; --bz-lh:1.55;
+  /* Espaciado (escala 4px) */
+  --bz-s1:4px; --bz-s2:8px; --bz-s3:12px; --bz-s4:16px; --bz-s5:24px; --bz-s6:32px; --bz-s7:48px; --bz-s8:64px;
+  /* Radios / sombras / borde */
+  --bz-radius:14px; --bz-radius-sm:9px; --bz-radius-pill:22px;
+  --bz-border:1px solid var(--bz-line);
+  --bz-shadow-sm:0 1px 6px rgba(46,94,58,.12);
+  --bz-shadow:0 8px 26px rgba(46,94,58,.13);
+  --bz-maxw:1100px;
+}
+
+/* ---------- 2. BASE ---------- */
+.bz, .bz *{box-sizing:border-box;}
+.bz{font-family:var(--bz-sans);color:var(--bz-ink);line-height:var(--bz-lh);background:var(--bz-cream);}
+.bz h1,.bz h2,.bz h3{font-family:var(--bz-serif);color:var(--bz-green);line-height:1.18;margin:0;}
+.bz h1{font-size:var(--bz-fs-h1);} .bz h2{font-size:var(--bz-fs-h2);} .bz h3{font-size:var(--bz-fs-h3);}
+.bz a{color:var(--bz-green);text-decoration:none;}
+.bz .eyebrow{font-size:var(--bz-fs-xs);letter-spacing:3px;text-transform:uppercase;color:var(--bz-gold);font-weight:700;}
+.bz .muted{color:var(--bz-grey);font-size:var(--bz-fs-sm);}
+.bz .wrap{max-width:var(--bz-maxw);margin:0 auto;padding:0 var(--bz-s5);}
+
+/* ---------- 3. BOTONES ---------- */
+.bz-btn{display:inline-block;padding:12px 20px;border-radius:11px;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:.15s;}
+.bz-btn--gold{background:var(--bz-gold);color:#2a2110;} .bz-btn--gold:hover{background:var(--bz-gold-l);}
+.bz-btn--green{background:var(--bz-green);color:#fff;} .bz-btn--green:hover{background:var(--bz-green-d);}
+.bz-btn--ghost{background:#fff;color:var(--bz-green);border:1.5px solid var(--bz-green);} .bz-btn--ghost:hover{background:var(--bz-green-soft);}
+.bz-btn--outline{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);}
+
+/* ---------- 4. TARJETAS ---------- */
+.bz-card{background:#fff;border:var(--bz-border);border-radius:var(--bz-radius);padding:var(--bz-s4);box-shadow:var(--bz-shadow-sm);}
+.bz-card--hover{transition:transform .12s,box-shadow .12s;}
+.bz-card--hover:hover{transform:translateY(-2px);box-shadow:var(--bz-shadow);}
+
+/* ---------- 5. KPI ---------- */
+.bz-kpi{background:#fff;border:var(--bz-border);border-radius:var(--bz-radius-sm);padding:8px 14px;min-width:96px;text-align:center;}
+.bz-kpi .v{font-family:var(--bz-serif);font-size:26px;font-weight:700;color:var(--bz-green);}
+.bz-kpi .l{font-size:var(--bz-fs-xs);color:var(--bz-grey);text-transform:uppercase;letter-spacing:.3px;}
+
+/* ---------- 6. SEMÁFORO OPERACIONAL ---------- */
+.bz-pill{display:inline-block;padding:2px 10px;border-radius:var(--bz-radius-pill);color:#fff;font-size:11px;font-weight:700;}
+.bz-dot{width:12px;height:12px;border-radius:50%;border:1.5px solid #fff;box-shadow:0 0 0 1px #aaa;display:inline-block;}
+.is-sano{background:var(--bz-sano);} .is-vigilar{background:var(--bz-vigilar);} .is-recuperandose{background:var(--bz-recuperandose);}
+.is-podado{background:var(--bz-podado);} .is-intervencion{background:var(--bz-intervencion);} .is-critico{background:var(--bz-critico);} .is-pendiente{background:var(--bz-pendiente);}
+.zona-alto{background:var(--bz-zona-alto);} .zona-medio{background:var(--bz-zona-medio);} .zona-bajo{background:var(--bz-zona-bajo);}
+
+/* ---------- 7. BADGES DEMO / LIVE ---------- */
+.bz-modo{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:var(--bz-radius-pill);font-size:12px;font-weight:700;color:#fff;}
+.bz-modo::before{content:"●";font-size:9px;}
+.bz-modo--live{background:var(--bz-live);} .bz-modo--demo{background:var(--bz-demo);} .bz-modo--cache{background:var(--bz-cache);}
+
+/* ---------- 8. DASHBOARD ---------- */
+.bz-header{background:var(--bz-green);color:#fff;padding:9px 16px;display:flex;align-items:center;gap:12px;}
+.bz-header .brand{font-family:var(--bz-serif);font-weight:700;font-size:18px;display:flex;align-items:center;gap:9px;}
+.bz-header .brand .ia{color:var(--bz-gold-l);}
+.bz-legend{background:#fff;padding:9px 11px;border-radius:var(--bz-radius-sm);box-shadow:var(--bz-shadow);font-size:var(--bz-fs-sm);}
+.bz-legend h4{margin:0 0 5px;font-size:12px;color:var(--bz-green);font-family:var(--bz-sans);}
+.bz-loading{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--bz-green);font-weight:600;}
+.bz-spin{width:24px;height:24px;border:3px solid #cfe0cf;border-top-color:var(--bz-green);border-radius:50%;animation:bz-sp .8s linear infinite;}
+@keyframes bz-sp{to{transform:rotate(360deg);}}
+
+/* ---------- 9. POPUP LEAFLET ---------- */
+.bz-pp .code{font-weight:700;font-size:15px;color:var(--bz-green);}
+.bz-pp table{border-collapse:collapse;font-size:12px;margin-top:4px;}
+.bz-pp td{padding:2px 6px;border-bottom:1px solid #eee;} .bz-pp td.k{color:var(--bz-grey);}
+
+/* ---------- 10. FORMULARIOS ---------- */
+.bz-field{display:block;font-size:var(--bz-fs-xs);color:var(--bz-grey);margin:10px 0 4px;text-transform:uppercase;letter-spacing:.3px;}
+.bz-input{width:100%;padding:11px;border:var(--bz-border);border-radius:var(--bz-radius-sm);font-size:14px;font-family:inherit;}
+
+/* ---------- 11. QR FICHA (móvil) ---------- */
+.bz-qr-wrap{max-width:480px;margin:0 auto;background:#fff;min-height:100vh;}
+.bz-qr-head{background:var(--bz-green);color:#fff;padding:14px 16px;}
+.bz-qr-kv{width:100%;border-collapse:collapse;} .bz-qr-kv td{padding:9px 6px;border-bottom:var(--bz-border);font-size:15px;} .bz-qr-kv td.k{color:var(--bz-grey);}
+
+/* ---------- 12. RESPONSIVE ---------- */
+@media(max-width:1024px){ .bz-hide-tablet{display:none!important;} }
+@media(max-width:760px){
+  .bz-hide-mobile{display:none!important;}
+  .bz{font-size:15px;}
+  :root{--bz-fs-display:30px;--bz-fs-h1:24px;}
+  .bz-grid-2,.bz-grid-3{grid-template-columns:1fr!important;}
+  .bz-brand-logo{height:26px;}
+}
+.bz-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:var(--bz-s4);}
+.bz-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--bz-s4);}
+.bz-grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:var(--bz-s4);}
+
+/* ---------- 13. UTILIDADES ---------- */
+.bz-badge{display:inline-block;padding:2px 9px;border-radius:var(--bz-radius-pill);font-size:11px;font-weight:700;color:#fff;}
+.bz-badge--demo{background:var(--bz-demo);} .bz-badge--live{background:var(--bz-cache);} .bz-badge--doc{background:#777;}
+
+/* ---------- 14. LOCKUP DE MARCA (logo en headers) ---------- */
+/* Cabeceras verdes: src="logo-dark.svg". Fondos claros: src="logo-horizontal.svg". */
+.bz-brand-logo{height:30px;width:auto;display:block;}
+.bz-brand-logo--sm{height:24px;} .bz-brand-logo--lg{height:40px;}
